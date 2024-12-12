@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Header from "./Header";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,13 +8,20 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
   return (
     <>
-      <LayoutStyle>{children}</LayoutStyle>
+      <LayoutStyle>
+      <Header />
+        {children}
+      </LayoutStyle>
     </>
   );
 }
 
 const LayoutStyle = styled.main`
-    color : ${({theme})=> theme.colors.text};
+  width : 100%;
+  margin : 0 auto;
+  max-width : ${({theme})=> theme.layout.width.default};
+  background-color: white;
+  min-height : 100vh;
 `;
 
 export default Layout;
