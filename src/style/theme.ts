@@ -1,13 +1,7 @@
 export const theme = {
     colors: {
-      background: '#1E1E1E',
+      background: '#f8f9fa',
       text: 'black',
       primary: 'red',
     },
-    layout : {
-      width : {
-        default : "1200px"
-      }
-    }
 };
-  
