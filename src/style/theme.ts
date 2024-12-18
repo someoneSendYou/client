@@ -6,7 +6,7 @@ export const theme = {
     },
     layout : {
       width : {
-        default : "1200px"
+        default : "430px"
       }
     }
 };

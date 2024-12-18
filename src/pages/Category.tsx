@@ -1,41 +1,29 @@
-import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
-import photo1 from '../assets/CategoryPhoto/photo1.png'
-import photo2 from '../assets/CategoryPhoto/photo2.png'
-import photo3 from '../assets/CategoryPhoto/photo3.png'
-
+import { Link } from "react-router-dom";
+import { styled } from "styled-components";
+import { CategoryData } from "../components/image/CategoryData"; // CategoryData 파일 불러오기
 
 function Category() {
     return (
         <CategoryStyle>
-                <h1>카테고리 선택</h1>
+            <h3>카테고리 선택</h3>
             <div className="category">
-                <div className="photo">
-                    <Link to="/choice">
-                        <img src={photo1} alt="photo1" />
-                    </Link>
-                </div>
-                <div className="photo">
-                    <Link to="/choice">
-                        <img src={photo2} alt="photo2" />
-                    </Link>
-                </div>
-                <div className="photo">
-                    <Link to="/choice">
-                        <img src={photo3} alt="photo3" />
-                    </Link>
-                </div>
-                <a href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">Designed by Freepik</a>
-                </div>
+                {CategoryData.map((item, index) => (
+                    <div className="photo" key={index}>
+                        <Link to="/choice" state={{ category: item.alt }}>
+                            <img src={item.src} alt={item.alt} />
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </CategoryStyle>
-    )
+    );
 }
 
 const CategoryStyle = styled.div`
 
-    h1{
+    h3{
         margin: auto;
-        padding-left: 60px;
+        padding-left: 36px;
     }
 
     .category{
@@ -48,7 +36,7 @@ const CategoryStyle = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-            width : 1080px;
+            width : 360px;
             height: auto;
             padding: 0 0 24px 0;
 

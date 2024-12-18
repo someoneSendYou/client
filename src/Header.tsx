@@ -32,17 +32,19 @@ const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: gray;
+  background-color: #eb5050;
 
   .logo {
     img {
-      width: 250px;
+      width: 100px;
+      
     }
   }
 
   .icon {
-    font-size: 80px; 
+    font-size: 50px; 
     color: white; 
+    transform: scaleX(-1); 
   }
 
   .back {
