@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Layout from './Layout';
-import Home from './Home';
 import { GlobalStyle } from "./style/global";
 import {theme} from './style/theme'
 import WriteLetter from "./pages/WriteLetter";
@@ -9,12 +7,15 @@ import ReceivedLetter from "./pages/ReceivedLetter";
 import ShareLetter from "./pages/ShareLetter";
 import ReceivedLetterDetail from "./pages/ReceivedLetterDetail";
 import Snowfall from "./Snowfall";
+import Layout from './Layout';
+import Category from "./pages/Category";
+import LetterChoice from "./pages/LetterChoice";
 
 function App() {
   const routeList = [
     {
       path:"/",
-      element : <Home />
+      element : <Category />
     },
     {
       path:"/letters/write",
@@ -30,7 +31,11 @@ function App() {
     },
     {
       path: '/letters/received/:id',
-      element: <ReceivedLetterDetail />
+      element: <ReceivedLetterDetail /> 
+    },
+    {
+      path:"/choice",
+      element: <LetterChoice />
     }
   ]
 
