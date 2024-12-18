@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { FiArrowRight } from "react-icons/fi";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link } from 'react-router-dom';
-import logo from "../src/assets/SendYou.png"
+import logo from "../src/assets/logo1.png"
 
 function Header() {
     const handleBack = () => {
@@ -13,11 +13,11 @@ function Header() {
             <div className="back" onClick={handleBack}>
                 <FiArrowRight className="icon"/>
             </div>
-            <h1 className="logo">
+            <div className="logo">
                 <Link to="/">
                     <img src={logo} alt="SendYou" />
                 </Link>
-            </h1>
+            </div>
             <div className="name">
                 <FiAlignJustify className="icon"/>
             </div>
@@ -27,22 +27,24 @@ function Header() {
 
 const HeaderStyle = styled.div`
   width : 100%;
+  max-width : 430px;
   margin : 0 0 20px 0;
-  max-width : ${({theme})=> theme.layout.width.default};
+  padding : 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: gray;
+  background-color: #eb5050;
 
   .logo {
     img {
-      width: 250px;
+      width: 76px;
     }
   }
 
   .icon {
-    font-size: 80px; 
+    font-size: 40px; 
     color: white; 
+    transform: scaleX(-1); 
   }
 
   .back {
