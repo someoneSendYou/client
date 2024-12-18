@@ -29,8 +29,6 @@ const HeaderStyle = styled.div`
   width : 100%;
   max-width : 430px;
   margin : 0 0 20px 0;
-  max-width : 430px;
-  padding : 16px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
