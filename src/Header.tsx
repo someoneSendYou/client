@@ -28,7 +28,7 @@ function Header() {
 const HeaderStyle = styled.div`
   width : 100%;
   margin : 0 0 20px 0;
-  max-width : ${({theme})=> theme.layout.width.default};
+  max-width : 430px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -19,7 +19,7 @@ function Layout({ children }: LayoutProps) {
 const LayoutStyle = styled.main`
   width : 100%;
   margin : 0 auto;
-  max-width : ${({theme})=> theme.layout.width.default};
+  max-width : 430px;
   background-color: white;
   min-height : 100vh;
 `;
