@@ -18,19 +18,19 @@ function App() {
       element : <Home />
     },
     {
-      path:"/letter",
+      path:"/letters/write",
       element : <WriteLetter />
     },
     {
-      path:"/received-letter",
+      path:"/letters/received",
       element: <ReceivedLetter />
     },
     {
-      path:"/share-letter",
+      path:"/letters/share",
       element: <ShareLetter />
     },
     {
-      path: '/letter-detail',
+      path: '/letters/received/:id',
       element: <ReceivedLetterDetail />
     }
   ]

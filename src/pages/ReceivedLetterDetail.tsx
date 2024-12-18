@@ -6,7 +6,7 @@ const ReceivedLetterDetail = () => {
   const navigate = useNavigate();
 
   const handleReply = () => {
-    navigate('/letter');
+    navigate('/letters/write');
   }
 
   return (

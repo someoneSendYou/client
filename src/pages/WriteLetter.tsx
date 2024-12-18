@@ -20,7 +20,7 @@ const WriteLetter = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/share-letter');
+    navigate('/letters/share');
   }
 
   return (
