@@ -6,7 +6,7 @@ interface CardProps {
 
 const Card = ({ img }: CardProps) => {
 
-  const imgUrl = `src/assets/christmas${img}.png`;
+  const imgUrl = `/images/christmas${img}.png`;
 
   return (
     <CardStyle>
@@ -18,10 +18,12 @@ const Card = ({ img }: CardProps) => {
 const CardStyle = styled.div`
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding: 20px;
+
   img {
     border-radius: 10px;
-    box-shadow: 5px 5px 3px #666
+    box-shadow: 5px 5px 3px #666;
+    cursor: pointer;
   }
 `;
 

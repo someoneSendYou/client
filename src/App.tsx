@@ -6,10 +6,9 @@ import { GlobalStyle } from "./style/global";
 import {theme} from './style/theme'
 import WriteLetter from "./pages/WriteLetter";
 import ReceivedLetter from "./pages/ReceivedLetter";
-import SendLetter from "./pages/SendLetter";
 import ShareLetter from "./pages/ShareLetter";
-import ShareKakao from "./components/share-letter/ShareKakao";
 import ReceivedLetterDetail from "./pages/ReceivedLetterDetail";
+import Snowfall from "./Snowfall";
 
 function App() {
   const routeList = [
@@ -46,6 +45,7 @@ function App() {
   
   return (
   <ThemeProvider theme={theme}>
+    <Snowfall />
     <GlobalStyle />
     <RouterProvider router={router}/>
   </ThemeProvider>
