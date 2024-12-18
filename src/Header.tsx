@@ -28,6 +28,7 @@ function Header() {
 const HeaderStyle = styled.div`
   width : 100%;
   max-width : 430px;
+  padding: 16px 0;
   margin : 0 0 20px 0;
   display: flex;
   justify-content: space-between;
@@ -41,7 +42,7 @@ const HeaderStyle = styled.div`
   }
 
   .icon {
-    font-size: 40px; 
+    font-size: 36px; 
     color: white; 
     transform: scaleX(-1); 
   }

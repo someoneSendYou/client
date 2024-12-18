@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Card from '../components/card/Card';
 import { FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 // interface WriteLetterProps {
@@ -11,12 +11,14 @@ import { useState } from 'react';
 const WriteLetter = () => {
 
   const [content, setContent] = useState<string>('');
+  const location = useLocation();
+  const { image }: { image: { src: string; alt: string } } = location.state || {};
+  const navigate = useNavigate();
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   }
 
-  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,8 +27,8 @@ const WriteLetter = () => {
 
   return (
     <WriteLetterStyle>
-      <h1>WriteLetter</h1>
-        <Card img={3} />
+      <h3>편지 작성</h3>
+        <Card image={image} />
       <form className='letter' onSubmit={handleSubmit}>
         <fieldset>
           <textarea
@@ -47,7 +49,12 @@ const WriteLetter = () => {
 }
 
 const WriteLetterStyle = styled.div`
-
+  
+  h3{        
+    margin: auto;
+    padding-left: 20px;
+  }
+  
   .letter {
     display: flex;
     justify-content: center;

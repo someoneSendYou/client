@@ -1,16 +1,14 @@
 import styled from 'styled-components'
 
 interface CardProps {
-  img: number;
+  image: { src: string; alt: string };
 }
 
-const Card = ({ img }: CardProps) => {
-
-  const imgUrl = `/images/christmas${img}.png`;
+const Card = ({ image }: CardProps) => {
 
   return (
     <CardStyle>
-      <img src={imgUrl} alt='편지카드' />
+      <img src={image.src} alt={image.alt} />
     </CardStyle>
   )
 }
@@ -21,7 +19,10 @@ const CardStyle = styled.div`
   padding: 20px;
 
   img {
-    border-radius: 10px;
+    width: 90%;
+    height : auto;
+    border : none;
+    border-radius: 8px;
     box-shadow: 5px 5px 3px #666;
     cursor: pointer;
   }
