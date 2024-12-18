@@ -22,7 +22,8 @@ const ShareKakao = () => {
   const shareCustomTemplate = () => {
     if (window.Kakao) {
       window.Kakao.Share.sendCustom({
-        templateId: 115277, 
+        templateId : 115482,
+        // templateId: 115277, 
         // templateArgs: {
         //   title: 
         //   description: 
