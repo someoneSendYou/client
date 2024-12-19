@@ -7,9 +7,18 @@ declare global {
   }
 }
 
+const templateArray: { [key: string]: number} = {
+  '1': 115492,
+  '2': 115492,
+  '3': 115277
+}
+
 const ShareKakao = () => {
 
   const kakaoKey = import.meta.env.VITE_APP_JAVASCRIPT_KEY;
+
+  const kakaoTemplate = sessionStorage.getItem('kakao-template');
+  console.log(kakaoTemplate);
 
   useEffect(() => {
     // Kakao SDK 초기화
@@ -22,7 +31,7 @@ const ShareKakao = () => {
   const shareCustomTemplate = () => {
     if (window.Kakao) {
       window.Kakao.Share.sendCustom({
-        templateId : 115482,
+        templateId : kakaoTemplate ? templateArray[kakaoTemplate] : 115277
         // templateId: 115277, 
         // templateArgs: {
         //   title: 

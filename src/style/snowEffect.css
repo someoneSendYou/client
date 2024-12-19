@@ -7,21 +7,35 @@ html, body {
     overflow-x: hidden;
     background: #D9D9D9;
 }
+
+// SnowFall.tsx 효과 적용
+.snowfall-container {
+    position: fixed; /* 부모 요소 기준 위치 설정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%; /* 스크롤 영역을 따라감 */
+    pointer-events: none; /* 클릭 이벤트 방해 방지 */
+    z-index: 10; /* 다른 요소 위에 표시 */
+}
+
 .snowflake {
     --size: 1vw;
     width: var(--size);
     height: var(--size);
     background: white;
     border-radius: 50%;
-    position: absolute;
+    position: absolute; /* 부모 요소 기준으로 눈송이 배치 */
     top: -5vh;
+    animation: snowfall 12s linear infinite;
 }
+
 @keyframes snowfall {
     0% {
         transform: translate3d(var(--left-ini), 0, 0);
    }
     100% {
-        transform: translate3d(var(--left-end), 110vh, 0);
+        transform: translate3d(var(--left-end), 100vh, 0);
    }
 }
 .snowflake:nth-child(1) {
@@ -429,3 +443,4 @@ html, body {
 .snowflake:nth-child(6n) {
     filter: blur(1px);
 }
+  
