@@ -4,12 +4,15 @@ import Card from '../components/card/Card';
 
 const ReceivedLetter = () => {
 
+  //card 위한 임시 이미지 url
+  const dummyData = {src: '/src/assets/Christmas/Christmas2.png', alt: 'Christmas2'};
+  
   return (
     <ReceivedLetterStyle>
       <div>
         <h2>Someone Send You</h2>
         <h3>Click 🔽</h3>
-        <Card img={3} />
+        <Card image={dummyData} />
         {/* <div className='flip'>
           <div className='card'>
             <div className='front'>

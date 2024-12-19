@@ -22,7 +22,12 @@ const WriteLetter = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/letters/share');
+    navigate('/letters/share',{
+      state : {
+        image,
+        content
+      }
+    });
   }
 
   return (
@@ -52,7 +57,7 @@ const WriteLetterStyle = styled.div`
   
   h3{        
     margin: auto;
-    padding-left: 20px;
+    padding-left: 40px;
   }
   
   .letter {

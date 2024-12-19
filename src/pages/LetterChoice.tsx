@@ -22,7 +22,6 @@ function LetterChoice() {
 
     return (
         <LetterChoiceStyle>
-            <h3>선택된 카테고리: {category}</h3>
             <h3>카드 선택</h3>
             <div className="category">
                 {selectedImages.map((image, index) => (

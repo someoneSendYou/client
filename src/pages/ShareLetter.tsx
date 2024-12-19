@@ -3,6 +3,7 @@ import Card from '../components/card/Card';
 import ShareKakao from '../components/share-letter/ShareKakao';
 import ShareURL from '../components/share-letter/ShareURL';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // interface ShareLetterProps {
 //     img: number;
@@ -11,6 +12,10 @@ import { useState } from 'react';
 const ShareLetter = () => {
 
   const [message, setMessage] = useState<boolean>(false);
+  const location = useLocation();
+  const {image , content} = location.state || {};
+  console.log(image)
+  console.log(content)
 
   const handleCopyClipBoard = async (text: string) => {
     try {
@@ -31,7 +36,7 @@ const ShareLetter = () => {
       <div className={`copy-message ${message ? 'visible' : ''}`}>
         <p>URL이 복사되었습니다! ✨</p>
       </div>
-      <Card img={3} />
+      <Card image={image} />
       <div className='message'>
         <p>
           편지 작성 완료! 💌<br/>
