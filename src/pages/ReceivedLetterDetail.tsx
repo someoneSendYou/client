@@ -22,10 +22,17 @@ const ReceivedLetterDetail = () => {
   const navigate = useNavigate();
 
   const [letterData, setLetterData] = useState<ResponseProps | undefined>(undefined);
+  const [selectedResponse, setSelectedResponse] = useState<string>('');
 
   const handleReply = () => {
     navigate('/letters/write');
   }
+
+  const handleResponse = (response: string) => {
+    sessionStorage.removeItem('kakao-template');
+    sessionStorage.setItem('kakao-template', response);
+    setSelectedResponse(response);
+  };
 
   const handleHashUrl = async () => {
     if (!id) {
@@ -46,7 +53,6 @@ const ReceivedLetterDetail = () => {
 
   return (
     <>
-      <h1>ReceivedLetterDetail</h1>
       <ReceivedLetterDetailStyle>
         <div>
           {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
@@ -55,14 +61,34 @@ const ReceivedLetterDetail = () => {
           </div>
           <div>
             <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
-            <div className='response-button'>
-              <button>🩷<div>감동이에요</div></button>
-              <button>💛<div>너무 고마워요</div></button>
-              <button>💚<div>우정뽀레버</div></button>
-            </div>
+            <div className="response-box">
+            <button
+              className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
+              onClick={() => handleResponse('1')}
+            >
+              🩷
+              <div>감동이에요</div>
+            </button>
+            <button
+              className={selectedResponse === '2' ? 'button-clicked' : 'button-unclicked'}
+              onClick={() => handleResponse('2')}
+            >
+              💛
+              <div>너무 고마워요</div>
+            </button>
+            <button
+              className={selectedResponse === '3' ? 'button-clicked' : 'button-unclicked'}
+              onClick={() => handleResponse('3')}
+            >
+              💚
+              <div>우정뽀레버</div>
+            </button>
+          </div>
           </div>
           <div className='reply-button'>
-            <button onClick={handleReply}>답장하러 가기</button>
+            <button disabled={!selectedResponse} onClick={handleReply}>
+              답장하러 가기
+            </button>
           </div>
         </div>
       </ReceivedLetterDetailStyle>
@@ -73,43 +99,51 @@ const ReceivedLetterDetail = () => {
 const ReceivedLetterDetailStyle = styled.div`
   display: flex;
   justify-content: center;
-  
+
   .letter {
     width: 350px;
     height: 350px;
-    background: #D9D9D9;
+    background: #f0f0f0;
     border-radius: 8px;
     padding: 20px;
   }
-  
+
   .response-title {
     font-size: 12px;
     padding: 10px 0;
   }
 
-  .response-button {
+  .response-box {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     padding: 20px 0;
-    
+
     button {
       border: none;
-      background: white;
+      border-radius: 8px;
+      padding: 5px;
       font-size: 20px;
-
       div {
         font-size: 12px;
       }
     }
   }
 
+  .button-clicked {
+    background: #e55858;
+  }
+
+  .button-unclicked {
+    background: white;
+  }
+
   .reply-button {
     display: flex;
     justify-content: flex-end;
     padding: 20px 0px;
-    
+
     button {
-      right: 0;
       border: none;
       border-radius: 8px;
       padding: 8px 12px;
