@@ -4,6 +4,8 @@ import ShareKakao from '../components/share-letter/ShareKakao';
 import ShareURL from '../components/share-letter/ShareURL';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { GoArrowRight } from 'react-icons/go';
 
 const ShareLetter = () => {
 
@@ -13,6 +15,8 @@ const ShareLetter = () => {
   console.log('img', image)
   console.log(response)
   console.log(response.url)
+
+  const navigate = useNavigate();
 
   const handleCopyClipBoard = async (text: string) => {
     try {
@@ -26,6 +30,11 @@ const ShareLetter = () => {
     catch (error) {
       alert('복사 실패!');
     }
+  }
+
+  const onClickMoreLetterButton = () => {
+    sessionStorage.clear();
+    navigate('/');
   }
   
   return (
@@ -43,6 +52,9 @@ const ShareLetter = () => {
       <div className='share-button'>
         <ShareKakao url={response?.url || ""} imagePath={image} />
         <ShareURL handleCopyClipBoard={handleCopyClipBoard} url={response.url} />
+      </div>
+      <div className='more-letter-button'>
+        <button onClick={onClickMoreLetterButton}>다른 카드 쓰러가기 <GoArrowRight /></button>
       </div>
     </ShareLetterStyle>
   )
@@ -83,7 +95,20 @@ const ShareLetterStyle = styled.div`
     padding: 20px;
   }
 
-    
+  .more-letter-button {
+    display: flex;
+    justify-content: end;
+    padding: 15px 40px 0 0;
+
+    button {
+      border: none;
+      border-bottom: solid 1px;
+      background: white;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default ShareLetter
