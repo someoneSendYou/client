@@ -1,21 +1,57 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { getLetter } from '../api/letter-api';
+import { useEffect, useState } from 'react';
+import Card from '../components/card/Card';
+
+interface ResponseProps {
+  message: string;
+  letters:{
+    id : number;
+    hashId : string;
+    comment : string;
+    imgPath : string;
+    title?: string;
+    templete_id?: number;
+    created_at?: string;
+  }
+}
 
 const ReceivedLetterDetail = () => {
-
+  const { id } = useParams<{id : string}>();
   const navigate = useNavigate();
+
+  const [letterData, setLetterData] = useState<ResponseProps | undefined>(undefined);
 
   const handleReply = () => {
     navigate('/letters/write');
   }
+
+  const handleHashUrl = async () => {
+    if (!id) {
+      console.log("유효하지 않은 메세지입니다");
+      return;
+    }
+    try {
+      const data = await getLetter(id);
+      setLetterData(data);
+    } catch (error) {
+      console.log("error:",error)
+    }
+  };
+
+  useEffect(()=>{
+    handleHashUrl();
+  },[])
 
   return (
     <>
       <h1>ReceivedLetterDetail</h1>
       <ReceivedLetterDetailStyle>
         <div>
+          {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
           <div className='letter'>
-            불러온내용
+          {letterData ? <div>{letterData.letters.comment}</div> : <div>Loading</div>}
           </div>
           <div>
             <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>

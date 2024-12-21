@@ -7,9 +7,13 @@ declare global {
   }
 }
 
-const ShareKakao = () => {
+interface ShareKakaoProps {
+  url : string;
+}
 
+const ShareKakao = ({url} : ShareKakaoProps) => {
   const kakaoKey = import.meta.env.VITE_APP_JAVASCRIPT_KEY;
+  console.log(url)
 
   useEffect(() => {
     // Kakao SDK 초기화
@@ -24,7 +28,6 @@ const ShareKakao = () => {
       window.Kakao.Share.sendCustom({
         templateId : 115482,
         // templateId: 115277, 
-        // templateArgs: {
         //   title: 
         //   description: 
         //   idx:

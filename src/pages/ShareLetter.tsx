@@ -13,9 +13,10 @@ const ShareLetter = () => {
 
   const [message, setMessage] = useState<boolean>(false);
   const location = useLocation();
-  const {image , content} = location.state || {};
+  const {image , response} = location.state || {};
   console.log(image)
-  console.log(content)
+  console.log(response)
+  console.log(response.url)
 
   const handleCopyClipBoard = async (text: string) => {
     try {
@@ -44,8 +45,8 @@ const ShareLetter = () => {
         </p>
       </div>
       <div className='share-button'>
-        <ShareKakao />
-        <ShareURL handleCopyClipBoard={handleCopyClipBoard} />
+        <ShareKakao url={response?.url || ""} />
+        <ShareURL handleCopyClipBoard={handleCopyClipBoard} url={response.url} />
       </div>
     </ShareLetterStyle>
   )

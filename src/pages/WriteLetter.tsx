@@ -3,6 +3,7 @@ import Card from '../components/card/Card';
 import { FormEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { sendLetter } from '../api/letter-api';
 
 // interface WriteLetterProps {
 //   img: number;
@@ -10,25 +11,38 @@ import { useState } from 'react';
 
 const WriteLetter = () => {
 
-  const [content, setContent] = useState<string>('');
+  const [comment, setcomment] = useState<string>('');
   const location = useLocation();
   const { image }: { image: { src: string; alt: string } } = location.state || {};
   const navigate = useNavigate();
 
-  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
+  const onChangecomment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setcomment(e.target.value);
   }
 
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/letters/share',{
-      state : {
-        image,
-        content
-      }
-    });
-  }
+
+    const letterContent = {
+      templete_id : 1,
+      imgPath: image.src,
+      title : "임시",
+      comment, 
+    }
+
+    try {
+      const response = await sendLetter(letterContent);
+      console.log('서버 응답:', response);
+
+      navigate('/letters/share', {
+          state: {image, response}
+      });
+
+    } catch (error) {
+      console.error('데이터 전송 중 오류 발생:', error);
+      alert('데이터 전송에 실패했습니다.');
+    }
+  };  
 
   return (
     <WriteLetterStyle>
@@ -40,8 +54,8 @@ const WriteLetter = () => {
             rows={16}
             cols={35}
             placeholder='여기에 편지를 써주세요'
-            value={content} 
-            onChange={onChangeContent}
+            value={comment} 
+            onChange={onChangecomment}
           >
           </textarea>
           <div className='send-button'>

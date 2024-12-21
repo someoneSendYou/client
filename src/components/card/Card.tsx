@@ -1,14 +1,16 @@
 import styled from 'styled-components'
 
 interface CardProps {
-  image: { src: string; alt: string };
+  image: { src: string; alt?: string } | string;
 }
 
 const Card = ({ image }: CardProps) => {
+  const imageSrc = typeof image === 'string' ? image : image.src; 
+  const imageAlt = typeof image === 'string' ? '' : image.alt || 'Image';
 
   return (
     <CardStyle>
-      <img src={image.src} alt={image.alt} />
+      <img src={imageSrc} alt={imageAlt} />
     </CardStyle>
   )
 }
