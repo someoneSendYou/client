@@ -21,7 +21,7 @@ const message: { [key: string]: string} = {
 const ShareKakao = ({ url } : ShareKakaoProps) => {
   const kakaoKey = import.meta.env.VITE_APP_JAVASCRIPT_KEY;
   
-  const kakaoTemplate = sessionStorage.getItem('kakao-template');
+  const kakaoTemplate = sessionStorage.getItem('kakao-template') || '0';
 
   useEffect(() => {
     // Kakao SDK 초기화
