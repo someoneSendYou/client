@@ -5,16 +5,12 @@ import ShareURL from '../components/share-letter/ShareURL';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// interface ShareLetterProps {
-//     img: number;
-// }
-
 const ShareLetter = () => {
 
   const [message, setMessage] = useState<boolean>(false);
   const location = useLocation();
   const {image , response} = location.state || {};
-  console.log(image)
+  console.log('img', image)
   console.log(response)
   console.log(response.url)
 
@@ -45,7 +41,7 @@ const ShareLetter = () => {
         </p>
       </div>
       <div className='share-button'>
-        <ShareKakao url={response?.url || ""} />
+        <ShareKakao url={response?.url || ""} imagePath={image} />
         <ShareURL handleCopyClipBoard={handleCopyClipBoard} url={response.url} />
       </div>
     </ShareLetterStyle>

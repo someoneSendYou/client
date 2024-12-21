@@ -25,7 +25,7 @@ const ReceivedLetterDetail = () => {
   const [selectedResponse, setSelectedResponse] = useState<string>('');
 
   const handleReply = () => {
-    navigate('/letters/write');
+    navigate('/');
   }
 
   const handleResponse = (response: string) => {
