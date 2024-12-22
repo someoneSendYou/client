@@ -56,50 +56,49 @@ const ReceivedLetterDetail = () => {
   }
 
   return (
-    <>
-      <ReceivedLetterDetailStyle>
-        <div className='container'>
-          {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
-          <div className='letter'>
-            {letterData ? (
-              <div dangerouslySetInnerHTML={{__html: formatComment(letterData.letters.comment)}}>
-              </div>)
-              : <div>Loading</div>}
-          </div>
-          <div>
-            <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
-            <div className="response-box">
-            <button
-              className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
-              onClick={() => handleResponse('1')}
-            >
-              ❤️
-              <div>감동이에요</div>
-            </button>
-            <button
-              className={selectedResponse === '2' ? 'button-clicked' : 'button-unclicked'}
-              onClick={() => handleResponse('2')}
-            >
-              💛
-              <div>너무 고마워요</div>
-            </button>
-            <button
-              className={selectedResponse === '3' ? 'button-clicked' : 'button-unclicked'}
-              onClick={() => handleResponse('3')}
-            >
-              💚
-              <div>우정뽀레버</div>
-            </button>
-          </div>
-          </div>
-          <div className='reply-button'>
-            <button disabled={!selectedResponse} onClick={handleReply}>
-              답장하러 가기
-            </button>
-          </div>
+    <ReceivedLetterDetailStyle>
+      <div className='container'>
+        {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
+        <div className='letter'>
+          {letterData ? (
+            <div dangerouslySetInnerHTML={{__html: formatComment(letterData.letters.comment)}}>
+            </div>)
+            : <div>Loading</div>}
         </div>
-      </ReceivedLetterDetailStyle>
-    </>
+        <div className='response-container'>
+          <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
+          <div className="response-box">
+          <button
+            className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('1')}
+          >
+            🩷
+            <div>감동이에요</div>
+          </button>
+          <button
+            className={selectedResponse === '2' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('2')}
+          >
+            💛
+            <div>너무 고마워요</div>
+          </button>
+          <button
+            className={selectedResponse === '3' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('3')}
+          >
+            💚
+            <div>우정뽀레버</div>
+          </button>
+        </div>
+        </div>
+        <div className='reply-button'>
+          <button disabled={!selectedResponse} onClick={handleReply}>
+            답장하러 가기
+          </button>
+        </div>
+      </div>
+    </ReceivedLetterDetailStyle>
+
   )
 }
 
@@ -109,6 +108,8 @@ const ReceivedLetterDetailStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    margin: 0;
   }
 
   .letter {
@@ -119,28 +120,32 @@ const ReceivedLetterDetailStyle = styled.div`
     padding: 20px;
   }
 
-    .response-title {
-      font-size: 12px;
-      padding: 10px 0;
-    }
+  .response-container {
+    padding: 0 30px;
+    width: 100%;
+  }
 
-    .response-box {
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      padding: 20px 0;
-      gap : 40px;
-      
-      button {
-        border: none;
-        border-radius: 8px;
-        padding: 5px;
-        font-size: 20px;
-        div {
-          font-size: 12px;
-        }
+  .response-title {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+
+  .response-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    gap : 40px;
+    
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 5px;
+      font-size: 20px;
+      div {
+        font-size: 12px;
       }
     }
+  }
 
   .button-clicked {
     background: #e55858;
