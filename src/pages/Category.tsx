@@ -22,7 +22,7 @@ function Category() {
 const CategoryStyle = styled.div`
     h3{
         margin: auto;
-        padding-left: 36px;
+        padding-left: 20px;
     }
 
     .category{

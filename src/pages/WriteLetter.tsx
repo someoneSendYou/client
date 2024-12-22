@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import Card from '../components/card/Card';
 import { FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { sendLetter } from '../api/letter-api';
 
 // interface WriteLetterProps {
 //   img: number;
@@ -10,31 +11,51 @@ import { useState } from 'react';
 
 const WriteLetter = () => {
 
-  const [content, setContent] = useState<string>('');
-
-  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-  }
-
+  const [comment, setcomment] = useState<string>('');
+  const location = useLocation();
+  const { image }: { image: { src: string; alt: string } } = location.state || {};
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    navigate('/letters/share');
+  const onChangecomment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setcomment(e.target.value);
   }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formattedComment = comment.replace(/\n/g, "<br>");
+    const letterContent = {
+      templete_id : 1,
+      imgPath: image.src,
+      title : "임시",
+      comment : formattedComment, 
+    }
+
+    try {
+      const response = await sendLetter(letterContent);
+      console.log('서버 응답:', response);
+
+      navigate('/letters/share', {
+          state: {image, response}
+      });
+
+    } catch (error) {
+      console.error('데이터 전송 중 오류 발생:', error);
+      alert('데이터 전송에 실패했습니다.');
+    }
+  };  
 
   return (
     <WriteLetterStyle>
-      <h1>WriteLetter</h1>
-        <Card img={3} />
+      <h3>편지 작성</h3>
+        <Card image={image} />
       <form className='letter' onSubmit={handleSubmit}>
         <fieldset>
           <textarea
             rows={16}
             cols={35}
             placeholder='여기에 편지를 써주세요'
-            value={content} 
-            onChange={onChangeContent}
+            value={comment} 
+            onChange={onChangecomment}
           >
           </textarea>
           <div className='send-button'>
@@ -47,7 +68,12 @@ const WriteLetter = () => {
 }
 
 const WriteLetterStyle = styled.div`
-
+  
+  h3{        
+    margin: auto;
+    padding-left: 40px;
+  }
+  
   .letter {
     display: flex;
     justify-content: center;

@@ -2,15 +2,16 @@ import styled from 'styled-components'
 
 interface ShareURLProps {
   handleCopyClipBoard: (text: string) => void;
+  url : string;
 }
 
-const ShareURL = ({ handleCopyClipBoard }: ShareURLProps) => {
+const ShareURL = ({ handleCopyClipBoard, url}: ShareURLProps) => {
 
   return (
     <ShareURLStyle>
       <button
         onClick={() => {
-          handleCopyClipBoard('http://localhost:5173/received-letter')
+          handleCopyClipBoard(`http://localhost:5173/letters/received/${url}`)
         }}
       >URL 공유하기</button>
     </ShareURLStyle>

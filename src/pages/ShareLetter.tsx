@@ -3,14 +3,17 @@ import Card from '../components/card/Card';
 import ShareKakao from '../components/share-letter/ShareKakao';
 import ShareURL from '../components/share-letter/ShareURL';
 import { useState } from 'react';
-
-// interface ShareLetterProps {
-//     img: number;
-// }
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { GoArrowRight } from 'react-icons/go';
 
 const ShareLetter = () => {
 
   const [message, setMessage] = useState<boolean>(false);
+  const location = useLocation();
+  const {image , response} = location.state || {};
+  const publicImage = `http://localhost:5173/image/${image.alt}.png`
+  const navigate = useNavigate();
 
   const handleCopyClipBoard = async (text: string) => {
     try {
@@ -25,13 +28,18 @@ const ShareLetter = () => {
       alert('복사 실패!');
     }
   }
+
+  const onClickMoreLetterButton = () => {
+    sessionStorage.clear();
+    navigate('/');
+  }
   
   return (
     <ShareLetterStyle>
       <div className={`copy-message ${message ? 'visible' : ''}`}>
         <p>URL이 복사되었습니다! ✨</p>
       </div>
-      <Card img={3} />
+      <Card image={image} />
       <div className='message'>
         <p>
           편지 작성 완료! 💌<br/>
@@ -39,8 +47,11 @@ const ShareLetter = () => {
         </p>
       </div>
       <div className='share-button'>
-        <ShareKakao />
-        <ShareURL handleCopyClipBoard={handleCopyClipBoard} />
+        <ShareKakao url={response?.url || ""} imagePath={publicImage} />
+        <ShareURL handleCopyClipBoard={handleCopyClipBoard} url={response.url} />
+      </div>
+      <div className='more-letter-button'>
+        <button onClick={onClickMoreLetterButton}>다른 카드 쓰러가기 <GoArrowRight /></button>
       </div>
     </ShareLetterStyle>
   )
@@ -81,7 +92,20 @@ const ShareLetterStyle = styled.div`
     padding: 20px;
   }
 
-    
+  .more-letter-button {
+    display: flex;
+    justify-content: end;
+    padding: 15px 40px 0 0;
+
+    button {
+      border: none;
+      border-bottom: solid 1px;
+      background: white;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default ShareLetter

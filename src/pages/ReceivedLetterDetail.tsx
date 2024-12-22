@@ -1,79 +1,168 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { getLetter } from '../api/letter-api';
+import { useEffect, useState } from 'react';
+import Card from '../components/card/Card';
+
+interface ResponseProps {
+  message: string;
+  letters:{
+    id : number;
+    hashId : string;
+    comment : string;
+    imgPath : string;
+    title?: string;
+    templete_id?: number;
+    created_at?: string;
+  }
+}
 
 const ReceivedLetterDetail = () => {
-
+  const { id } = useParams<{id : string}>();
   const navigate = useNavigate();
 
+  const [letterData, setLetterData] = useState<ResponseProps | undefined>(undefined);
+  const [selectedResponse, setSelectedResponse] = useState<string>('');
+
   const handleReply = () => {
-    navigate('/letters/write');
+    navigate('/');
+  }
+
+  const handleResponse = (response: string) => {
+    sessionStorage.removeItem('kakao-template');
+    sessionStorage.setItem('kakao-template', response);
+    setSelectedResponse(response);
+  };
+
+  const handleHashUrl = async () => {
+    if (!id) {
+      console.log("유효하지 않은 메세지입니다");
+      return;
+    }
+    try {
+      const data = await getLetter(id);
+      setLetterData(data);
+    } catch (error) {
+      console.log("error:",error)
+    }
+  };
+
+  useEffect(()=>{
+    handleHashUrl();
+  },[])
+
+  const formatComment = (comment: string) => {
+    return comment.replace(/\n/g, "<br>");
   }
 
   return (
-    <>
-      <h1>ReceivedLetterDetail</h1>
-      <ReceivedLetterDetailStyle>
-        <div>
-          <div className='letter'>
-            불러온내용
-          </div>
-          <div>
-            <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
-            <div className='response-button'>
-              <button>🩷<div>감동이에요</div></button>
-              <button>💛<div>너무 고마워요</div></button>
-              <button>💚<div>우정뽀레버</div></button>
-            </div>
-          </div>
-          <div className='reply-button'>
-            <button onClick={handleReply}>답장하러 가기</button>
-          </div>
+    <ReceivedLetterDetailStyle>
+      <div className='container'>
+        {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
+        <div className='letter'>
+          {letterData ? (
+            <div dangerouslySetInnerHTML={{__html: formatComment(letterData.letters.comment)}}>
+            </div>)
+            : <div>Loading</div>}
         </div>
-      </ReceivedLetterDetailStyle>
-    </>
+        <div className='response-container'>
+          <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
+          <div className="response-box">
+          <button
+            className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('1')}
+          >
+            🩷
+            <div>감동이에요</div>
+          </button>
+          <button
+            className={selectedResponse === '2' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('2')}
+          >
+            💛
+            <div>너무 고마워요</div>
+          </button>
+          <button
+            className={selectedResponse === '3' ? 'button-clicked' : 'button-unclicked'}
+            onClick={() => handleResponse('3')}
+          >
+            💚
+            <div>우정뽀레버</div>
+          </button>
+        </div>
+        </div>
+        <div className='reply-button'>
+          <button disabled={!selectedResponse} onClick={handleReply}>
+            답장하러 가기
+          </button>
+        </div>
+      </div>
+    </ReceivedLetterDetailStyle>
+
   )
 }
 
 const ReceivedLetterDetailStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
   .letter {
     width: 350px;
     height: 350px;
-    background: #D9D9D9;
+    background: #f0f0f0;
     border-radius: 8px;
     padding: 20px;
   }
-  
+
+  .response-container {
+    padding: 0 30px;
+    width: 100%;
+  }
+
   .response-title {
     font-size: 12px;
     padding: 10px 0;
   }
 
-  .response-button {
+  .response-box {
     display: flex;
-    justify-content: space-around;
-    padding: 20px 0;
+    justify-content: space-between;
+    padding: 10px 10px;
+    gap : 40px;
     
     button {
       border: none;
-      background: white;
+      border-radius: 8px;
+      padding: 5px;
       font-size: 20px;
-
       div {
         font-size: 12px;
       }
     }
   }
 
+  .button-clicked {
+    background: #e55858;
+  }
+
+  .button-unclicked {
+    background: white;
+  }
+
   .reply-button {
     display: flex;
     justify-content: flex-end;
+    width : 100%;
     padding: 20px 0px;
-    
+    padding-right: 28px;
+
     button {
-      right: 0;
       border: none;
       border-radius: 8px;
       padding: 8px 12px;

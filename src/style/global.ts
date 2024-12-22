@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     min-height: 100vh;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
   }
 `;

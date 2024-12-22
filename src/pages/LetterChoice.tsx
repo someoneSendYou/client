@@ -22,12 +22,11 @@ function LetterChoice() {
 
     return (
         <LetterChoiceStyle>
-            <h3>선택된 카테고리: {category}</h3>
             <h3>카드 선택</h3>
             <div className="category">
                 {selectedImages.map((image, index) => (
                     <div className="photo" key={index}>
-                        <Link to="/letters/write">
+                        <Link to="/letters/write" state={{ image }}>
                             <img src={image.src} alt={image.alt} />
                         </Link>
                     </div>
@@ -41,7 +40,7 @@ const LetterChoiceStyle = styled.div`
 
     h3{
         margin: auto;
-        padding-left: 36px;
+        padding-left: 20px;
     }
 
     .category{
