@@ -37,10 +37,10 @@ const ShareKakao = ({ url, imagePath } : ShareKakaoProps) => {
         templateId : 115277,
         // templateId : 115482,
         templateArgs: {
-          title: kakaoTemplate ? '띵동 편지카드가 도착했습니다 !' : '띵동 답장이 도착했습니다~!',
+          title: kakaoTemplate ? '띵동 답장이 도착했습니다~!' : '띵동 편지카드가 도착했습니다 !',
           imageUrl: imagePath,
           message: kakaoTemplate ? message[kakaoTemplate] : message[0],
-          button: kakaoTemplate ? '답장하러 가기 💌' : '편지 보러가기 💌',
+          button: kakaoTemplate ? '편지 보러가기 💌' : '답장하러 가기 💌',
           url: url,
         },
       });
