@@ -1,5 +1,5 @@
 import Christmas from "../../assets/Category/Christmas.png"
-import ChuSeok from "../../assets/Category/Chuseok.png"
+import ChuSeok from "../../assets/Category/ChuSeok.png"
 import NewYear from "../../assets/Category/NewYear.png"
 
 export const CategoryData = [
