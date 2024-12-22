@@ -72,7 +72,7 @@ const ReceivedLetterDetail = () => {
             className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
             onClick={() => handleResponse('1')}
           >
-            🩷
+            ❤️
             <div>감동이에요</div>
           </button>
           <button
