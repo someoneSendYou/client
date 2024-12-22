@@ -141,6 +141,7 @@ const ReceivedLetterDetailStyle = styled.div`
       border-radius: 8px;
       padding: 5px;
       font-size: 20px;
+      color: black;
       div {
         font-size: 12px;
       }
