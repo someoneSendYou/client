@@ -12,10 +12,7 @@ const ShareLetter = () => {
   const [message, setMessage] = useState<boolean>(false);
   const location = useLocation();
   const {image , response} = location.state || {};
-  console.log('img', image)
-  console.log(response)
-  console.log(response.url)
-
+  const publicImage = `http://localhost:5173/image/${image.alt}.png`
   const navigate = useNavigate();
 
   const handleCopyClipBoard = async (text: string) => {
@@ -50,7 +47,7 @@ const ShareLetter = () => {
         </p>
       </div>
       <div className='share-button'>
-        <ShareKakao url={response?.url || ""} imagePath={image} />
+        <ShareKakao url={response?.url || ""} imagePath={publicImage} />
         <ShareURL handleCopyClipBoard={handleCopyClipBoard} url={response.url} />
       </div>
       <div className='more-letter-button'>

@@ -18,7 +18,7 @@ const message: { [key: string]: string} = {
   '3': '우리 우정 뽀레버 아시죠? 💚'
 }
 
-const ShareKakao = ({ url } : ShareKakaoProps) => {
+const ShareKakao = ({ url, imagePath } : ShareKakaoProps) => {
   const kakaoKey = import.meta.env.VITE_APP_JAVASCRIPT_KEY;
   
   const kakaoTemplate = sessionStorage.getItem('kakao-template') || '0';
@@ -34,12 +34,14 @@ const ShareKakao = ({ url } : ShareKakaoProps) => {
   const shareCustomTemplate = () => {
     if (window.Kakao) {
       window.Kakao.Share.sendCustom({
-        templateId : 115277,
+        // templateId : 115277,
+        templateId : 115482,
         templateArgs: {
           title: kakaoTemplate ? '띵동 편지카드가 도착했습니다 !' : '띵동 답장이 도착했습니다~!',
-          imageUrl: url,
-          message: kakaoTemplate ? message[kakaoTemplate] : message[0]
-        }
+          imageUrl: imagePath,
+          message: kakaoTemplate ? message[kakaoTemplate] : message[0],
+          url: url,
+        },
       });
     } else {
       console.error("Kakao SDK is not loaded.");
