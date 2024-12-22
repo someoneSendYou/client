@@ -51,13 +51,20 @@ const ReceivedLetterDetail = () => {
     handleHashUrl();
   },[])
 
+  const formatComment = (comment: string) => {
+    return comment.replace(/\n/g, "<br>");
+  }
+
   return (
     <>
       <ReceivedLetterDetailStyle>
-        <div>
+        <div className='container'>
           {letterData ? (<Card image={letterData.letters.imgPath || ""} />) : <div>Loading</div>}
           <div className='letter'>
-          {letterData ? <div>{letterData.letters.comment}</div> : <div>Loading</div>}
+            {letterData ? (
+              <div dangerouslySetInnerHTML={{__html: formatComment(letterData.letters.comment)}}>
+              </div>)
+              : <div>Loading</div>}
           </div>
           <div>
             <div className='response-title'>하트를 클릭해서 마음을 전달해주세요</div>
@@ -66,7 +73,7 @@ const ReceivedLetterDetail = () => {
               className={selectedResponse === '1' ? 'button-clicked' : 'button-unclicked'}
               onClick={() => handleResponse('1')}
             >
-              🩷
+              ❤️
               <div>감동이에요</div>
             </button>
             <button
@@ -97,8 +104,12 @@ const ReceivedLetterDetail = () => {
 }
 
 const ReceivedLetterDetailStyle = styled.div`
-  display: flex;
-  justify-content: center;
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   .letter {
     width: 350px;
@@ -108,27 +119,28 @@ const ReceivedLetterDetailStyle = styled.div`
     padding: 20px;
   }
 
-  .response-title {
-    font-size: 12px;
-    padding: 10px 0;
-  }
+    .response-title {
+      font-size: 12px;
+      padding: 10px 0;
+    }
 
-  .response-box {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-around;
-    padding: 20px 0;
-
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 5px;
-      font-size: 20px;
-      div {
-        font-size: 12px;
+    .response-box {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      gap : 40px;
+      
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 5px;
+        font-size: 20px;
+        div {
+          font-size: 12px;
+        }
       }
     }
-  }
 
   .button-clicked {
     background: #e55858;
@@ -141,7 +153,9 @@ const ReceivedLetterDetailStyle = styled.div`
   .reply-button {
     display: flex;
     justify-content: flex-end;
+    width : 100%;
     padding: 20px 0px;
+    padding-right: 28px;
 
     button {
       border: none;

@@ -22,12 +22,12 @@ const WriteLetter = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const formattedComment = comment.replace(/\n/g, "<br>");
     const letterContent = {
       templete_id : 1,
       imgPath: image.src,
       title : "임시",
-      comment, 
+      comment : formattedComment, 
     }
 
     try {
