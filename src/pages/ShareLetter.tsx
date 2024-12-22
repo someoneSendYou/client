@@ -12,7 +12,8 @@ const ShareLetter = () => {
   const [message, setMessage] = useState<boolean>(false);
   const location = useLocation();
   const {image , response} = location.state || {};
-  const publicImage = `http://localhost:5173/image/${image.alt}.png`
+  // const publicImage = `http://localhost:5173/image/${image.alt}.png`
+  const publicImage = `https://someonesendyou.netlify.app/image/${image.alt}.png`
   const navigate = useNavigate();
 
   const handleCopyClipBoard = async (text: string) => {

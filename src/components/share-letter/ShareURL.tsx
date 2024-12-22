@@ -11,7 +11,8 @@ const ShareURL = ({ handleCopyClipBoard, url}: ShareURLProps) => {
     <ShareURLStyle>
       <button
         onClick={() => {
-          handleCopyClipBoard(`http://localhost:5173/letters/received/${url}`)
+          // handleCopyClipBoard(`http://localhost:5173/letters/received/${url}`)
+          handleCopyClipBoard(`https://someonesendyou.netlify.app//letters/received/${url}`)
         }}
       >URL 공유하기</button>
     </ShareURLStyle>
